@@ -29,6 +29,9 @@ main .clima-hoy {
 main .clima-hoy .localidad {
   font-size: 24px;
 }
+main .clima-hoy .fecha-actual {
+  margin: 10px 0;
+}
 main .clima-hoy .clima-actual {
   display: flex;
   align-items: center;
