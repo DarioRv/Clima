@@ -14,8 +14,9 @@
 <body>
     <main>
         <article class="clima-hoy">
-            <div class="localidad">Argentina</div>
+            <div class="localidad"></div>
             <div class="fecha-actual"></div>
+            <div class="hora-actual"></div>
             <div class="clima-actual">
                 <div class="icono"><img src="images/nublado.png" alt="Nublado"></div>
                 <div class="temperatura">22ºC</div>
@@ -28,29 +29,31 @@
             <div class="mas-informacion">
                 <div class="item">
                     <span>Vientos<i class="bi bi-info-circle"></i></span>
-                    <span>5mph</span>
+                    <span class="vientos">5mph</span>
                 </div>
                 <div class="item">
                     <span>Humedad<i class="bi bi-info-circle"></i></span>
-                    <span>53%</span>
+                    <span class="humedad">53%</span>
                 </div>
                 <div class="item">
                     <span>Visibilidad<i class="bi bi-info-circle"></i></span>
-                    <span>6.2mi</span>
+                    <span class="visibilidad">6.2mi</span>
                 </div>
                 <div class="item">
                     <span>Precipitaciones<i class="bi bi-info-circle"></i></span>
-                    <span>80%</span>
-                </div>
-                <div class="item">
-                    <span>Sunset<i class="bi bi-sunset"></i></span>
+                    <span class="precipitaciones">80%</span>
                 </div>
                 <div class="item">
                     <span>Sunrise<i class="bi bi-sunrise"></i></span>
+                    <span class="sunrise"></span>
+                </div>
+                <div class="item">
+                    <span>Sunset<i class="bi bi-sunset"></i></span>
+                    <span class="sunset"></span>
                 </div>
             </div>
             <div class="horas">
-                <div class="hora">
+                <!-- <div class="hora">
                     <span>12:00</span>
                     <span>27ºC</span>
                 </div>
@@ -77,12 +80,12 @@
                 <div class="hora">
                     <span>18:00</span>
                     <span>17ºC</span>
-                </div>
+                </div> -->
             </div>
         </article>
-        <article class="clima-proximo-dias">
-            <div class="prev"><i class="bi bi-arrow-left-circle-fill"></i></div>
-            <!-- <section class="resumen">
+        <article class="clima-proximos-dias">
+            <!--<div class="prev"><i class="bi bi-arrow-left-circle-fill"></i></div>
+            <section class="resumen">
                 <div class="dia">Lun 18</div>
                 <div class="icono"><img src="images/sol.png" alt="Soleado"></div>
                 <div class="max">32ºC</div>
@@ -123,8 +126,8 @@
                 <div class="icono"><img src="images/nevado.png" alt="Nevada"></div>
                 <div class="max">3ºC</div>
                 <div class="min">-4ºC</div>
-            </section> -->
-            <div class="next"><i class="bi bi-arrow-right-circle-fill"></i></div>
+            </section>
+            <div class="next"><i class="bi bi-arrow-right-circle-fill"></i></div>-->
         </article>
     </main>
     <script src="js/main.js"></script>

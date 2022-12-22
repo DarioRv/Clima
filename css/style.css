@@ -53,6 +53,9 @@ main .clima-hoy .horas .hora {
   flex-direction: column;
   gap: 10px;
 }
+main .clima-hoy .horas .hora span:first-child {
+  font-weight: bold;
+}
 main .clima-hoy .mas-informacion {
   display: flex;
   gap: 20px;
@@ -62,28 +65,31 @@ main .clima-hoy .mas-informacion .item {
   flex-direction: column;
 }
 main .clima-hoy .mas-informacion .item span:first-child {
+  font-weight: bold;
   display: flex;
   gap: 5px;
 }
 main .clima-hoy .mas-informacion .item span:first-child:hover {
   text-decoration: underline;
 }
-main .clima-proximo-dias {
+main .clima-proximos-dias {
   width: 95vw;
   height: 30vh;
   border-radius: 10px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  overflow: auto;
   gap: 10px;
 }
-main .clima-proximo-dias .prev, main .clima-proximo-dias .next {
+main .clima-proximos-dias .prev, main .clima-proximos-dias .next {
   font-size: 30px;
 }
-main .clima-proximo-dias .prev:hover, main .clima-proximo-dias .next:hover {
+main .clima-proximos-dias .prev:hover, main .clima-proximos-dias .next:hover {
   cursor: pointer;
 }
-main .clima-proximo-dias .resumen {
+main .clima-proximos-dias .resumen {
   width: 120px;
   height: 90%;
   padding: 20px 20px;
@@ -96,23 +102,23 @@ main .clima-proximo-dias .resumen {
   grid-template-rows: auto auto auto;
   grid-template-areas: "dia dia" "icono max" "icono min";
 }
-main .clima-proximo-dias .resumen .dia {
+main .clima-proximos-dias .resumen .dia {
   grid-area: dia;
   font-size: 18px;
 }
-main .clima-proximo-dias .resumen .icono {
+main .clima-proximos-dias .resumen .icono {
   grid-area: icono;
   justify-self: center;
 }
-main .clima-proximo-dias .resumen .icono img {
+main .clima-proximos-dias .resumen .icono img {
   width: 40px;
 }
-main .clima-proximo-dias .resumen .max {
+main .clima-proximos-dias .resumen .max {
   grid-area: max;
   font-size: 18px;
   font-weight: bold;
 }
-main .clima-proximo-dias .resumen .min {
+main .clima-proximos-dias .resumen .min {
   grid-area: min;
   font-size: 18px;
 }/*# sourceMappingURL=style.css.map */
