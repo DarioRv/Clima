@@ -16,13 +16,12 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
   padding: 30px 0;
 }
 main .clima-hoy {
   background-color: rgba(195, 222, 233, 0.5);
   width: 95vw;
-  height: 60vh;
+  height: fit-content;
   border-radius: 10px;
   padding: 20px;
 }
@@ -34,14 +33,23 @@ main .clima-hoy .fecha-actual {
 }
 main .clima-hoy .clima-actual {
   display: flex;
+  gap: 40px;
+  grid-template-columns: auto auto;
   align-items: center;
-  gap: 20px;
+  padding: 20px 0;
 }
 main .clima-hoy .clima-actual .icono img {
-  width: 120px;
+  width: 80px;
+  height: fit-content;
 }
-main .clima-hoy .clima-actual .temperatura {
-  font-size: 56px;
+main .clima-hoy .clima-actual .condicion {
+  font-size: 18px;
+}
+main .clima-hoy .clima-actual .temperatura .real {
+  font-size: 46px;
+}
+main .clima-hoy .clima-actual .temperatura .sensacion-termica {
+  font-size: 14px;
 }
 main .clima-hoy .horas {
   display: flex;
@@ -51,14 +59,15 @@ main .clima-hoy .horas {
 main .clima-hoy .horas .hora {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 main .clima-hoy .horas .hora span:first-child {
   font-weight: bold;
 }
 main .clima-hoy .mas-informacion {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
 }
 main .clima-hoy .mas-informacion .item {
   display: flex;
@@ -74,14 +83,31 @@ main .clima-hoy .mas-informacion .item span:first-child:hover {
 }
 main .clima-proximos-dias {
   width: 95vw;
-  height: 30vh;
+  height: fit-content;
   border-radius: 10px;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   overflow: auto;
   gap: 10px;
+}
+main .clima-proximos-dias::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+main .clima-proximos-dias::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+main .clima-proximos-dias::-webkit-scrollbar-button:increment, main .clima-proximos-dias::-webkit-scrollbar-button {
+  display: none;
+}
+main .clima-proximos-dias::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+main .clima-proximos-dias::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+}
+main .clima-proximos-dias::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 main .clima-proximos-dias .prev, main .clima-proximos-dias .next {
   font-size: 30px;
@@ -90,7 +116,7 @@ main .clima-proximos-dias .prev:hover, main .clima-proximos-dias .next:hover {
   cursor: pointer;
 }
 main .clima-proximos-dias .resumen {
-  width: 120px;
+  width: fit-content;
   height: 90%;
   padding: 20px 20px;
   background-color: rgba(195, 222, 233, 0.5);
@@ -98,6 +124,7 @@ main .clima-proximos-dias .resumen {
   display: grid;
   align-items: center;
   column-gap: 15px;
+  row-gap: 20px;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
   grid-template-areas: "dia dia" "icono max" "icono min";
@@ -121,4 +148,13 @@ main .clima-proximos-dias .resumen .max {
 main .clima-proximos-dias .resumen .min {
   grid-area: min;
   font-size: 18px;
+}
+
+@media (min-width: 610px) {
+  .clima-hoy .clima-actual {
+    display: flex !important;
+  }
+  .clima-hoy .mas-informacion {
+    display: flex !important;
+  }
 }/*# sourceMappingURL=style.css.map */

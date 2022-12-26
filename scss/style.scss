@@ -14,12 +14,11 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
     padding: 30px 0;
     .clima-hoy{
         background-color: rgba(195, 222, 233, 0.5);
         width: 95vw;
-        height: 60vh;
+        height: fit-content;
         border-radius: 10px;
         padding: 20px;
         .localidad{
@@ -30,15 +29,26 @@ main{
         }
         .clima-actual{
             display: flex;
+            gap: 40px;
+            grid-template-columns: auto auto;
             align-items: center;
-            gap: 20px;
+            padding: 20px 0;
             .icono{
                 img{
-                    width: 120px;
+                    width: 80px;
+                    height: fit-content;
                 }
             }
+            .condicion{
+                font-size: 18px;
+            }
             .temperatura{
-                font-size: 56px;
+                .real{
+                    font-size: 46px;
+                }
+                .sensacion-termica{
+                    font-size: 14px;
+                }
             }
         }
         .horas{
@@ -51,12 +61,13 @@ main{
                 }
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 5px;
             }
         }
         .mas-informacion{
-            display: flex;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
             .item{
                 span:first-child{
                     font-weight: bold;
@@ -73,14 +84,36 @@ main{
     }
     .clima-proximos-dias{
         width: 95vw;
-        height: 30vh;
+        height: fit-content;
         border-radius: 10px;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
         overflow: auto;
         gap: 10px;
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        
+        &::-webkit-scrollbar:vertical {
+            width:10px;
+        }
+        
+        &::-webkit-scrollbar-button:increment,&::-webkit-scrollbar-button {
+            display: none;
+        } 
+        
+        &::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background-color: #797979;
+            border-radius: 20px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;  
+        }
         .prev, .next{
             font-size: 30px;
             &:hover{
@@ -88,7 +121,7 @@ main{
             }
         }
         .resumen{
-            width: 120px;
+            width: fit-content;
             height: 90%;
             padding: 20px 20px;
             background-color: rgba(195, 222, 233, 0.5);
@@ -96,6 +129,7 @@ main{
             display: grid;
             align-items: center;
             column-gap: 15px;
+            row-gap: 20px;
             grid-template-columns: auto auto;
             grid-template-rows: auto auto auto;
             .dia{
@@ -119,6 +153,16 @@ main{
                 font-size: 18px;
             }
             grid-template-areas: "dia dia" "icono max" "icono min";
+        }
+    }
+}
+@media (min-width: 610px){
+    .clima-hoy{
+        .clima-actual{
+            display: flex !important; 
+        }
+        .mas-informacion{
+            display: flex !important;
         }
     }
 }

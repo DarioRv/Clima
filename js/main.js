@@ -1,21 +1,26 @@
 let datetimeFormatter = (datetime) => {
     let date = new Date(datetime);
     date = date.toDateString();
-    console.log(date);
     return date.substring(0, 3) + " " + date.substring(8, 10);
 }
 let setAddress = (address) => {
     document.querySelector(".clima-hoy").querySelector(".localidad").textContent = address;
 }
-let setCurrentTime = (address) => {
-    document.querySelector(".clima-hoy").querySelector(".hora-actual").textContent = address;
+let setCurrentTime = (date, datetime) => {
+    document.querySelector(".fecha-actual").textContent = datetimeFormatter(date);
+    document.querySelector(".clima-hoy").querySelector(".hora-actual").textContent = datetime;
 }
 let setActualConditions = (currentConditions, datos) => {
     let currentConditionsContainerHtml = document.querySelector(".clima-hoy");
-    // set current temperature
-    currentConditionsContainerHtml.querySelector(".temperatura").textContent = currentConditions.temp + "ºF";
+    // set icon
+    currentConditionsContainerHtml.querySelector("img").setAttribute("src", `images/${currentConditions.icon}.png`);
+    currentConditionsContainerHtml.querySelector("img").setAttribute("alt", `${currentConditions.icon}`);
     // set current condition
-    currentConditionsContainerHtml.querySelector(".clima").textContent = currentConditions.conditions;
+    //currentConditionsContainerHtml.querySelector(".condicion").textContent = currentConditions.conditions;
+    // set current temperature
+    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".real").textContent = currentConditions.temp + " ºF";
+    // set current temperature
+    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".sensacion-termica").textContent = "Sensación termica: " + currentConditions.feelslike + "ºF";
     // set current windspeed
     currentConditionsContainerHtml.querySelector(".vientos").textContent = currentConditions.windspeed + " mph";
     // set current humidity
@@ -29,15 +34,16 @@ let setActualConditions = (currentConditions, datos) => {
     // set sunset time's
     currentConditionsContainerHtml.querySelector(".sunset").textContent = currentConditions.sunset.substring(0,5);
     // set today's max and min temperature
-    currentConditionsContainerHtml.querySelector(".max").textContent = datos.days[0].tempmax;
-    currentConditionsContainerHtml.querySelector(".min").textContent = datos.days[0].tempmin;
+    currentConditionsContainerHtml.querySelector(".max").textContent = "Máxima: " + datos.days[0].tempmax + " ºF";
+    currentConditionsContainerHtml.querySelector(".min").textContent = "Mínima: " + datos.days[0].tempmin + " ºF";
     // set hourly temperatures
     datos.days[0].hours.forEach(hour => {
-        if (hour.datetime > datos.currentConditions.datetime){
+        if (hour.datetime >= datos.currentConditions.datetime){
             currentConditionsContainerHtml.querySelector(".horas").innerHTML += 
             `<div class="hora">
                 <span>${hour.datetime.substring(0,5)}</span>
                 <span>${hour.temp}ºF</span>
+                <img src="images/${hour.icon}.png" alt="${hour.icon}" width="40px" heigth="40px">
             </div>
             `;
         }
@@ -58,7 +64,7 @@ let setNextDaysConditions = (nextDaysconditions) => {
 }
 let renderizarDatos = (datos) => {
     setAddress(datos.resolvedAddress);
-    setCurrentTime(datos.currentConditions.datetime);
+    setCurrentTime(datos.days[0].datetime,datos.currentConditions.datetime);
     setActualConditions(datos.currentConditions, datos);
     setNextDaysConditions(datos.days);
 }
