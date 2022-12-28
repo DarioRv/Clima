@@ -1,3 +1,15 @@
+let quitarEspacios = (string) => {
+    let newString = "";
+    for (let i = 0; i < string.length; i+=1){
+        if ([string[i]] == " "){
+            newString += "%20";
+        }
+        else{
+            newString += string[i];
+        }
+    }
+    return newString;
+}
 let datetimeFormatter = (datetime) => {
     let date = new Date(datetime);
     date = date.toDateString();
@@ -16,11 +28,11 @@ let setActualConditions = (currentConditions, datos) => {
     currentConditionsContainerHtml.querySelector("img").setAttribute("src", `images/${currentConditions.icon}.png`);
     currentConditionsContainerHtml.querySelector("img").setAttribute("alt", `${currentConditions.icon}`);
     // set current condition
-    //currentConditionsContainerHtml.querySelector(".condicion").textContent = currentConditions.conditions;
+    currentConditionsContainerHtml.querySelector(".condicion").textContent = currentConditions.conditions;
     // set current temperature
     currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".real").textContent = currentConditions.temp + " ºF";
-    // set current temperature
-    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".sensacion-termica").textContent = "Sensación termica: " + currentConditions.feelslike + "ºF";
+    // set current feelslike temperature
+    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".sensacion-termica").textContent = "Sensación termica: " + currentConditions.feelslike + " ºF";
     // set current windspeed
     currentConditionsContainerHtml.querySelector(".vientos").textContent = currentConditions.windspeed + " mph";
     // set current humidity
@@ -34,8 +46,8 @@ let setActualConditions = (currentConditions, datos) => {
     // set sunset time's
     currentConditionsContainerHtml.querySelector(".sunset").textContent = currentConditions.sunset.substring(0,5);
     // set today's max and min temperature
-    currentConditionsContainerHtml.querySelector(".max").textContent = "Máxima: " + datos.days[0].tempmax + " ºF";
-    currentConditionsContainerHtml.querySelector(".min").textContent = "Mínima: " + datos.days[0].tempmin + " ºF";
+    currentConditionsContainerHtml.querySelector(".max").textContent = datos.days[0].tempmax + " ºF";
+    currentConditionsContainerHtml.querySelector(".min").textContent = datos.days[0].tempmin + " ºF";
     // set hourly temperatures
     datos.days[0].hours.forEach(hour => {
         if (hour.datetime >= datos.currentConditions.datetime){
@@ -68,14 +80,32 @@ let renderizarDatos = (datos) => {
     setActualConditions(datos.currentConditions, datos);
     setNextDaysConditions(datos.days);
 }
-fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/san%20salvador%20de%20jujuy?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json")
-.then((respuesta) => {
-    return respuesta.json();
-})
-.then((datos) => {
-    console.log(datos);
-    renderizarDatos(datos);
-})
-.catch((err) => {
-    console.log(err);
-})
+let realizarPeticion = (ciudad) => {
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${ciudad}?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json`)
+    .then((respuesta) => {
+        return respuesta.json();
+    })
+    .then((datos) => {
+        console.log(datos);
+        renderizarDatos(datos);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+if (localStorage.getItem("ciudad") != undefined){
+    let ciudad = localStorage.getItem("ciudad");
+    document.querySelector(".pop-up-container").style.display = "none";
+    realizarPeticion(quitarEspacios(ciudad));
+}
+else{
+    document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e) => {
+        e.preventDefault();
+        let ciudadIngresada = document.querySelector("#ciudad").value;
+        document.querySelector(".pop-up-container").style.display = "none";
+        localStorage.setItem("ciudad", ciudadIngresada);
+        realizarPeticion(quitarEspacios(ciudad));
+    });
+}
+

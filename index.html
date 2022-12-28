@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body>
+    <div class="pop-up-container">
+        <div class="pop-up-dialog">
+            <h5>Introuce una ciudad</h5>
+            <form class="form-seleccionar-ciudad">
+                <input type="text" name="ciudad" id="ciudad" placeholder="Ej: San Salvador de Jujuy">
+                <br>
+                <input type="submit" value="ACEPTAR">
+            </form>
+        </div>
+    </div>
     <main>
         <article class="clima-hoy">
             <div class="localidad"></div>
@@ -21,10 +31,10 @@
                 <div class="icono">
                     <img src="images/clima.png" alt="Clima">
                 </div>
-                <!-- <div class="condicion"></div> -->
                 <div class="temperatura">
                     <div class="real"></div>
                     <div class="sensacion-termica"></div>
+                    <div class="condicion"></div>
                 </div>
             </div>
             <div class="mas-informacion">
@@ -49,7 +59,7 @@
                     <span class="visibilidad">6.2mi</span>
                 </div>
                 <div class="item">
-                    <span>Precipitaciones<i class="bi bi-info-circle"></i></span>
+                    <span>Prob. de precipitaciones<i class="bi bi-info-circle"></i></span>
                     <span class="precipitaciones">80%</span>
                 </div>
                 <div class="item">
@@ -68,6 +78,7 @@
             <div class="next"><i class="bi bi-arrow-right-circle-fill"></i></div>-->
         </article>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

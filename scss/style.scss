@@ -8,6 +8,59 @@ body{
     background-color: rgb(56, 62, 94);
     color: #fff;
 }
+.pop-up-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    .pop-up-dialog{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 40%;
+        background-color: #fff;
+        border: 4px solid rgb(75, 100, 243);
+        border-radius: 10px;
+        h5{
+            font-size: 36px;
+            color: #000;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            input[type=text]{
+                width: 300px;
+                height: 40px;
+                border: 4px solid rgba(75, 100, 243, 0.5);
+                border-radius: 10px;
+                outline: none;
+                padding: 8px;
+                font-size: 16px;
+                &:focus{
+                    border: 4px solid rgba(75, 100, 243, 1);
+                }
+            }
+            input[type=submit]{
+                width: 150px;
+                height: 30px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgba(75, 100, 243, 1);
+                font-size: 18px;
+            }
+        }
+    }
+}
 main{
     width: 100vw;
     height: 100vh;
@@ -39,9 +92,6 @@ main{
                     height: fit-content;
                 }
             }
-            .condicion{
-                font-size: 18px;
-            }
             .temperatura{
                 .real{
                     font-size: 46px;
@@ -49,10 +99,14 @@ main{
                 .sensacion-termica{
                     font-size: 14px;
                 }
+                .condicion{
+                    font-size: 14px;
+                }
             }
         }
         .horas{
             display: flex;
+            flex-wrap: wrap;
             padding: 20px 0;
             gap: 15px;
             .hora{
