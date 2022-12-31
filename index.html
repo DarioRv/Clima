@@ -7,73 +7,78 @@
     <title>Clima</title>
     <link rel="shortcut icon" href="images/clima.png" type="image/x-icon">
     <meta name="description" content="Descubre el clima de tu localidad">
-    <meta name="keywords" content="clima, tiempo">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="keywords" content="clima, tiempo, pronostico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="pop-up-container">
-        <div class="pop-up-dialog">
-            <h5>Introuce una ciudad</h5>
-            <form class="form-seleccionar-ciudad">
-                <input type="text" name="ciudad" id="ciudad" placeholder="Ej: San Salvador de Jujuy">
-                <br>
-                <input type="submit" value="ACEPTAR">
+    <div class="pop-up-container w-screen h-screen flex items-center justify-center fixed bg-black bg-opacity-50">
+        <div class="pop-up-dialog w-11/12 lg:w-fit bg-white py-6 px-6 rounded-xl shadow-2xl">
+            <h5 class="text-4xl text-blue-400 text-center">¡Bienvenido!</h5>
+            <p class="text-xl text-center text-gray-500 mt-1 mb-6">Introduce una ciudad para saber el pronostico de esa zona.</p>
+            <form class="form-seleccionar-ciudad flex flex-col items-center gap-3">
+                <input type="text" name="ciudad" id="ciudad" class="text-2xl text-gray-600 border-2 border-gray-300 rounded-xl outline-none px-3 focus:border-blue-400 hover:border-gray-500" placeholder="Ej: San Salvador de Jujuy" autocomplete="off">
+                <input type="submit" class="text-lg text-blue-400 font-bold border-2 border-blue-400 rounded-full px-5 hover:bg-blue-400 hover:text-white" value="ACEPTAR">
             </form>
         </div>
     </div>
-    <main>
-        <article class="clima-hoy">
-            <div class="localidad"></div>
-            <div class="fecha-actual"></div>
-            <div class="hora-actual"></div>
-            <div class="clima-actual">
-                <div class="icono">
+    <main class="w-full flex flex-col items-center py-4 bg-blue-900 bg-opacity-80 overflow-hidden">
+        <article class="clima-hoy w-11/12 h-fit bg-gray-900 bg-opacity-50 rounded-xl py-6 px-6 text-white shadow-xl">
+            <div class="localidad flex items-center gap-x-2 text-2xl underline">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div class="ciudad"></div>
+                <button class="editar-ciudad"><i class="bi bi-pencil-square"></i></button>
+            </div>
+            <div class="fecha-actual font-bold my-2"></div>
+            <div class="clima-actual flex gap-10 my-5">
+                <div class="icono min-w-fit">
                     <img src="images/clima.png" alt="Clima">
                 </div>
                 <div class="temperatura">
-                    <div class="real"></div>
+                    <div class="real text-4xl"></div>
                     <div class="sensacion-termica"></div>
                     <div class="condicion"></div>
                 </div>
             </div>
-            <div class="mas-informacion">
+            <div class="mas-informacion grid grid-cols-2 gap-y-2 gap-5 lg:flex">
                 <div class="item">
-                    <span>Máxima<i class="bi bi-info-circle"></i></span>
-                    <span class="max">Max: 32ºC</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Máxima<i class="bi bi-info-circle"></i></span>
+                    <span class="max"></span>
                 </div>
                 <div class="item">
-                    <span>Mínima<i class="bi bi-info-circle"></i></span>
-                    <span class="min">Min: 11ºC</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Mínima<i class="bi bi-info-circle"></i></span>
+                    <span class="min"></span>
                 </div>
                 <div class="item">
-                    <span>Vientos<i class="bi bi-info-circle"></i></span>
-                    <span class="vientos">5mph</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Vientos<i class="bi bi-info-circle"></i></span>
+                    <span class="vientos"></span>
                 </div>
                 <div class="item">
-                    <span>Humedad<i class="bi bi-info-circle"></i></span>
-                    <span class="humedad">53%</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Humedad<i class="bi bi-info-circle"></i></span>
+                    <span class="humedad"></span>
                 </div>
                 <div class="item">
-                    <span>Visibilidad<i class="bi bi-info-circle"></i></span>
-                    <span class="visibilidad">6.2mi</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Visibilidad<i class="bi bi-info-circle"></i></span>
+                    <span class="visibilidad"></span>
                 </div>
                 <div class="item">
-                    <span>Prob. de precipitaciones<i class="bi bi-info-circle"></i></span>
-                    <span class="precipitaciones">80%</span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Prob. de precipitaciones<i class="bi bi-info-circle"></i></span>
+                    <span class="precipitaciones"></span>
                 </div>
                 <div class="item">
-                    <span>Sunrise<i class="bi bi-sunrise"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Sunrise<i class="bi bi-sunrise"></i></span>
                     <span class="sunrise"></span>
                 </div>
                 <div class="item">
-                    <span>Sunset<i class="bi bi-sunset"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Sunset<i class="bi bi-sunset"></i></span>
                     <span class="sunset"></span>
                 </div>
             </div>
-            <div class="horas"></div>
+            <div class="horas flex gap-10 my-4 overflow-auto"></div>
         </article>
-        <article class="clima-proximos-dias">
+        <article class="clima-proximos-dias w-11/12 flex gap-4 my-4 text-white overflow-auto">
             <!--<div class="prev"><i class="bi bi-arrow-left-circle-fill"></i></div>
             <div class="next"><i class="bi bi-arrow-right-circle-fill"></i></div>-->
         </article>

@@ -16,11 +16,10 @@ let datetimeFormatter = (datetime) => {
     return date.substring(0, 3) + " " + date.substring(8, 10);
 }
 let setAddress = (address) => {
-    document.querySelector(".clima-hoy").querySelector(".localidad").textContent = address;
+    document.querySelector(".clima-hoy").querySelector(".localidad").querySelector(".ciudad").textContent = address;
 }
 let setCurrentTime = (date, datetime) => {
-    document.querySelector(".fecha-actual").textContent = datetimeFormatter(date);
-    document.querySelector(".clima-hoy").querySelector(".hora-actual").textContent = datetime;
+    document.querySelector(".fecha-actual").textContent = datetimeFormatter(date) + ", " + datetime.substring(0,5);
 }
 let setActualConditions = (currentConditions, datos) => {
     let currentConditionsContainerHtml = document.querySelector(".clima-hoy");
@@ -52,7 +51,7 @@ let setActualConditions = (currentConditions, datos) => {
     datos.days[0].hours.forEach(hour => {
         if (hour.datetime >= datos.currentConditions.datetime){
             currentConditionsContainerHtml.querySelector(".horas").innerHTML += 
-            `<div class="hora">
+            `<div class="hora flex flex-col">
                 <span>${hour.datetime.substring(0,5)}</span>
                 <span>${hour.temp}ºF</span>
                 <img src="images/${hour.icon}.png" alt="${hour.icon}" width="40px" heigth="40px">
@@ -65,11 +64,11 @@ let setNextDaysConditions = (nextDaysconditions) => {
     let summary = document.querySelector(".clima-proximos-dias");
     nextDaysconditions.forEach(dayConditions => {
         summary.innerHTML += `
-        <section class="resumen">
-            <div class="dia">${datetimeFormatter(dayConditions.datetime)}</div>
-            <div class="icono"><img src="images/${dayConditions.icon}.png" alt="${dayConditions.icon}"></div>
-            <div class="max">${dayConditions.tempmax}ºF</div>
-            <div class="min">${dayConditions.tempmin}ºF</div>
+        <section class="resumen grid grid-rows-3 items-center gap-y-5 gap-x-4 bg-gray-900 bg-opacity-50 rounded-lg py-3 px-6 shadow-lg">
+            <div class="dia text-lg font-bold col-span-2">${datetimeFormatter(dayConditions.datetime)}</div>
+            <div class="icono col-span-1 row-span-2 w-10"><img src="images/${dayConditions.icon}.png" alt="${dayConditions.icon}"></div>
+            <div class="max col-span-1">${dayConditions.tempmax}ºF</div>
+            <div class="min col-span-1">${dayConditions.tempmin}ºF</div>
         </section>
         `;
     });
@@ -81,6 +80,8 @@ let renderizarDatos = (datos) => {
     setNextDaysConditions(datos.days);
 }
 let realizarPeticion = (ciudad) => {
+    console.log(ciudad);
+    console.log(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${ciudad}?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json`);
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${ciudad}?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json`)
     .then((respuesta) => {
         return respuesta.json();
@@ -90,11 +91,26 @@ let realizarPeticion = (ciudad) => {
         renderizarDatos(datos);
     })
     .catch((err) => {
-        console.log(err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontraron resultados.',
+            showDenyButton: true,
+            confirmButtonText: 'Reintentar',
+            denyButtonText: `Cancelar`
+        }).then((result) => {
+            if (result.isConfirmed){
+                location.reload();
+            }
+            else if (result.isDenied){
+                Swal.fire('¿Quieres reportar este error?')
+                document.querySelector(".icono").setAttribute("class", "animate-pulse");
+            }
+        })
     })
 }
-
-if (localStorage.getItem("ciudad") != undefined){
+/* - - - - - - - */
+if (localStorage.getItem("ciudad") != "" && localStorage.getItem("ciudad") != undefined){
     let ciudad = localStorage.getItem("ciudad");
     document.querySelector(".pop-up-container").style.display = "none";
     realizarPeticion(quitarEspacios(ciudad));
@@ -102,10 +118,12 @@ if (localStorage.getItem("ciudad") != undefined){
 else{
     document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e) => {
         e.preventDefault();
-        let ciudadIngresada = document.querySelector("#ciudad").value;
         document.querySelector(".pop-up-container").style.display = "none";
-        localStorage.setItem("ciudad", ciudadIngresada);
+        let ciudad = document.querySelector("#ciudad").value;
+        localStorage.setItem("ciudad", ciudad);
         realizarPeticion(quitarEspacios(ciudad));
     });
 }
-
+document.querySelector(".editar-ciudad").addEventListener("click", () => {
+    document.querySelector(".pop-up-container").style.display = "flex";
+});

@@ -1,0 +1,19 @@
+main .clima-proximos-dias::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+  main .clima-proximos-dias::-webkit-scrollbar:vertical {
+    width: 10px;
+  }
+  main .clima-proximos-dias::-webkit-scrollbar-button:increment, main .clima-proximos-dias::-webkit-scrollbar-button {
+    display: none;
+  }
+  main .clima-proximos-dias::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+  main .clima-proximos-dias::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+  }
+  main .clima-proximos-dias::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
