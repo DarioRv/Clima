@@ -115,15 +115,13 @@ if (localStorage.getItem("ciudad") != "" && localStorage.getItem("ciudad") != un
     document.querySelector(".pop-up-container").style.display = "none";
     realizarPeticion(quitarEspacios(ciudad));
 }
-else{
-    document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e) => {
-        e.preventDefault();
-        document.querySelector(".pop-up-container").style.display = "none";
-        let ciudad = document.querySelector("#ciudad").value;
-        localStorage.setItem("ciudad", ciudad);
-        realizarPeticion(quitarEspacios(ciudad));
-    });
-}
+document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e) => {
+    e.preventDefault();
+    document.querySelector(".pop-up-container").style.display = "none";
+    let ciudad = document.querySelector("#ciudad").value;
+    localStorage.setItem("ciudad", ciudad);
+    realizarPeticion(quitarEspacios(ciudad));
+});
 document.querySelector(".editar-ciudad").addEventListener("click", () => {
     document.querySelector(".pop-up-container").style.display = "flex";
 });

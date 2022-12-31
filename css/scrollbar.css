@@ -1,19 +1,19 @@
-main .clima-proximos-dias::-webkit-scrollbar {
+main .clima-proximos-dias::-webkit-scrollbar, main .horas::-webkit-scrollbar{
     -webkit-appearance: none;
-  }
-  main .clima-proximos-dias::-webkit-scrollbar:vertical {
+}
+main .clima-proximos-dias::-webkit-scrollbar:vertical, main .horas::-webkit-scrollbar:vertical{
     width: 10px;
-  }
-  main .clima-proximos-dias::-webkit-scrollbar-button:increment, main .clima-proximos-dias::-webkit-scrollbar-button {
+}
+main .clima-proximos-dias::-webkit-scrollbar-button:increment, main .clima-proximos-dias::-webkit-scrollbar-button, main .horas::-webkit-scrollbar-button:increment, main .horas::-webkit-scrollbar-button{
     display: none;
-  }
-  main .clima-proximos-dias::-webkit-scrollbar:horizontal {
-    height: 10px;
-  }
-  main .clima-proximos-dias::-webkit-scrollbar-thumb {
+}
+main .clima-proximos-dias::-webkit-scrollbar:horizontal, main .horas::-webkit-scrollbar:horizontal{
+    height: 8px;
+}
+main .clima-proximos-dias::-webkit-scrollbar-thumb, main .horas::-webkit-scrollbar-thumb{
     background-color: #797979;
     border-radius: 20px;
-  }
-  main .clima-proximos-dias::-webkit-scrollbar-track {
+}
+main .clima-proximos-dias::-webkit-scrollbar-track, main .horas::-webkit-scrollbar-track{
     border-radius: 10px;
-  }
+}
