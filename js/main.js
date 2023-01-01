@@ -50,6 +50,7 @@ let setActualConditions = (currentConditions, datos) => {
     // set hourly temperatures
     datos.days[0].hours.forEach(hour => {
         if (hour.datetime >= datos.currentConditions.datetime){
+            currentConditionsContainerHtml.querySelector(".horas").innerHTML = "";
             currentConditionsContainerHtml.querySelector(".horas").innerHTML += 
             `<div class="hora flex flex-col">
                 <span>${hour.datetime.substring(0,5)}</span>
