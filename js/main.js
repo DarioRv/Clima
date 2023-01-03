@@ -48,9 +48,9 @@ let setActualConditions = (currentConditions, datos) => {
     currentConditionsContainerHtml.querySelector(".max").textContent = datos.days[0].tempmax + " ºF";
     currentConditionsContainerHtml.querySelector(".min").textContent = datos.days[0].tempmin + " ºF";
     // set hourly temperatures
+    currentConditionsContainerHtml.querySelector(".horas").innerHTML = "";
     datos.days[0].hours.forEach(hour => {
         if (hour.datetime >= datos.currentConditions.datetime){
-            currentConditionsContainerHtml.querySelector(".horas").innerHTML = "";
             currentConditionsContainerHtml.querySelector(".horas").innerHTML += 
             `<div class="hora flex flex-col">
                 <span>${hour.datetime.substring(0,5)}</span>
