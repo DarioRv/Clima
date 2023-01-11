@@ -81,14 +81,11 @@ let renderizarDatos = (datos) => {
     setNextDaysConditions(datos.days);
 }
 let realizarPeticion = (ciudad) => {
-    console.log(ciudad);
-    console.log(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${ciudad}?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json`);
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${ciudad}?unitGroup=us&include=events%2Calerts%2Chours%2Cdays%2Ccurrent&key=49X5ESKFZK4SFTZWCHM6EFAAA&contentType=json`)
     .then((respuesta) => {
         return respuesta.json();
     })
     .then((datos) => {
-        console.log(datos);
         renderizarDatos(datos);
     })
     .catch((err) => {
