@@ -39,7 +39,7 @@ let setActualConditions = (currentConditions, datos) => {
     // set current visibility
     currentConditionsContainerHtml.querySelector(".visibilidad").textContent = currentConditions.visibility + " mi";
     // set current precipitation probably
-    currentConditionsContainerHtml.querySelector(".precipitaciones").textContent = currentConditions.precipprob + "%";
+    currentConditionsContainerHtml.querySelector(".precipitaciones").textContent = datos.days[0].precipprob + "%";
     // set sunrise time's
     currentConditionsContainerHtml.querySelector(".sunrise").textContent = currentConditions.sunrise.substring(0,5);
     // set sunset time's
@@ -86,6 +86,7 @@ let realizarPeticion = (ciudad) => {
         return respuesta.json();
     })
     .then((datos) => {
+        console.log(datos);
         renderizarDatos(datos);
     })
     .catch((err) => {
