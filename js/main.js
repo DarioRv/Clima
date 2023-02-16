@@ -1,4 +1,12 @@
+let disenableLoader = () => {
+    document.querySelector(".loader-container").style.display = "none";
+    document.querySelector("main").style.display = "flex";
+}
+let enableLoader = () => {
+    document.querySelector(".loader-container").style.display = "flex";
+}
 let quitarEspacios = (string) => {
+    string = string.trim();
     let newString = "";
     for (let i = 0; i < string.length; i+=1){
         if ([string[i]] == " "){
@@ -75,6 +83,7 @@ let setNextDaysConditions = (nextDaysconditions) => {
     });
 }
 let renderizarDatos = (datos) => {
+    disenableLoader();
     setAddress(datos.resolvedAddress);
     setCurrentTime(datos.days[0].datetime,datos.currentConditions.datetime);
     setActualConditions(datos.currentConditions, datos);
@@ -86,7 +95,6 @@ let realizarPeticion = (ciudad) => {
         return respuesta.json();
     })
     .then((datos) => {
-        console.log(datos);
         renderizarDatos(datos);
     })
     .catch((err) => {
@@ -99,17 +107,15 @@ let realizarPeticion = (ciudad) => {
             denyButtonText: `Cancelar`
         }).then((result) => {
             if (result.isConfirmed){
+                localStorage.removeItem("ciudad");
                 location.reload();
-            }
-            else if (result.isDenied){
-                Swal.fire('¿Quieres reportar este error?')
-                document.querySelector(".icono").setAttribute("class", "animate-pulse");
             }
         })
     })
 }
 /* - - - - - - - */
 if (localStorage.getItem("ciudad") != "" && localStorage.getItem("ciudad") != undefined){
+    enableLoader();
     let ciudad = localStorage.getItem("ciudad");
     document.querySelector(".pop-up-container").style.display = "none";
     realizarPeticion(quitarEspacios(ciudad));
@@ -123,4 +129,7 @@ document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e)
 });
 document.querySelector(".editar-ciudad").addEventListener("click", () => {
     document.querySelector(".pop-up-container").style.display = "flex";
+});
+document.querySelector(".btn-cancelar").addEventListener("click", () => {
+    document.querySelector(".pop-up-container").style.display = "none";
 });
