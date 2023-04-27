@@ -5,12 +5,12 @@ let disenableLoader = () => {
 let enableLoader = () => {
     document.querySelector(".loader-container").style.display = "flex";
 }
-let quitarEspacios = (string) => {
+let replaceCharacter = (string, oldCharacter, newCharacter) => {
     string = string.trim();
     let newString = "";
     for (let i = 0; i < string.length; i+=1){
-        if ([string[i]] == " "){
-            newString += "%20";
+        if ([string[i]] == oldCharacter){
+            newString += newCharacter;
         }
         else{
             newString += string[i];
@@ -18,16 +18,18 @@ let quitarEspacios = (string) => {
     }
     return newString;
 }
-let datetimeFormatter = (datetime) => {
-    let date = new Date(datetime);
-    date = date.toDateString();
-    return date.substring(0, 3) + " " + date.substring(8, 10);
+let dateFormatter = (date) => {
+    date = replaceCharacter(date, "-", "/");
+    let formattedDate = new Date(date);
+    console.log(formattedDate);
+    formattedDate = formattedDate.toDateString();
+    return formattedDate.substring(0, 3) + " " + formattedDate.substring(8, 10);
 }
 let setAddress = (address) => {
     document.querySelector(".clima-hoy").querySelector(".localidad").querySelector(".ciudad").textContent = address;
 }
-let setCurrentTime = (date, datetime) => {
-    document.querySelector(".fecha-actual").textContent = datetimeFormatter(date) + ", " + datetime.substring(0,5);
+let setCurrentTime = (date, hour) => {
+    document.querySelector(".fecha-actual").textContent = dateFormatter(date) + ", " + hour.substring(0,5);
 }
 let setActualConditions = (currentConditions, datos) => {
     let currentConditionsContainerHtml = document.querySelector(".clima-hoy");
@@ -39,7 +41,7 @@ let setActualConditions = (currentConditions, datos) => {
     // set current temperature
     currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".real").textContent = currentConditions.temp + " ºF";
     // set current feelslike temperature
-    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".sensacion-termica").textContent = "Sensación termica: " + currentConditions.feelslike + " ºF";
+    currentConditionsContainerHtml.querySelector(".temperatura").querySelector(".sensacion-termica").textContent = "Feels Like: " + currentConditions.feelslike + " ºF";
     // set current windspeed
     currentConditionsContainerHtml.querySelector(".vientos").textContent = currentConditions.windspeed + " mph";
     // set current humidity
@@ -47,10 +49,10 @@ let setActualConditions = (currentConditions, datos) => {
     // set current visibility
     currentConditionsContainerHtml.querySelector(".visibilidad").textContent = currentConditions.visibility + " mi";
     // set current precipitation probably
-    currentConditionsContainerHtml.querySelector(".precipitaciones").textContent = datos.days[0].precipprob + "%";
-    // set sunrise time's
+    currentConditionsContainerHtml.querySelector(".precipitaciones").textContent = currentConditions.precipprob + "%";
+    // set sunrise time
     currentConditionsContainerHtml.querySelector(".sunrise").textContent = currentConditions.sunrise.substring(0,5);
-    // set sunset time's
+    // set sunset time
     currentConditionsContainerHtml.querySelector(".sunset").textContent = currentConditions.sunset.substring(0,5);
     // set today's max and min temperature
     currentConditionsContainerHtml.querySelector(".max").textContent = datos.days[0].tempmax + " ºF";
@@ -74,7 +76,7 @@ let setNextDaysConditions = (nextDaysconditions) => {
     nextDaysconditions.forEach(dayConditions => {
         summary.innerHTML += `
         <section class="resumen grid grid-rows-3 items-center gap-y-5 gap-x-4 bg-gray-900 bg-opacity-50 rounded-lg py-3 px-6 shadow-lg">
-            <div class="dia text-lg font-bold col-span-2">${datetimeFormatter(dayConditions.datetime)}</div>
+            <div class="dia text-lg font-bold col-span-2">${dateFormatter(dayConditions.datetime)}</div>
             <div class="icono col-span-1 row-span-2 w-10"><img src="images/${dayConditions.icon}.png" alt="${dayConditions.icon}"></div>
             <div class="max col-span-1">${dayConditions.tempmax}ºF</div>
             <div class="min col-span-1">${dayConditions.tempmin}ºF</div>
@@ -83,6 +85,7 @@ let setNextDaysConditions = (nextDaysconditions) => {
     });
 }
 let renderizarDatos = (datos) => {
+    console.log(datos);
     disenableLoader();
     setAddress(datos.resolvedAddress);
     setCurrentTime(datos.days[0].datetime,datos.currentConditions.datetime);
@@ -118,14 +121,14 @@ if (localStorage.getItem("ciudad") != "" && localStorage.getItem("ciudad") != un
     enableLoader();
     let ciudad = localStorage.getItem("ciudad");
     document.querySelector(".pop-up-container").style.display = "none";
-    realizarPeticion(quitarEspacios(ciudad));
+    realizarPeticion(replaceCharacter(ciudad, " ", "%20"));
 }
 document.querySelector(".form-seleccionar-ciudad").addEventListener("submit",(e) => {
     e.preventDefault();
     document.querySelector(".pop-up-container").style.display = "none";
     let ciudad = document.querySelector("#ciudad").value;
     localStorage.setItem("ciudad", ciudad);
-    realizarPeticion(quitarEspacios(ciudad));
+    realizarPeticion(replaceCharacter(ciudad, " ", "%20"));
 });
 document.querySelector(".editar-ciudad").addEventListener("click", () => {
     document.querySelector(".pop-up-container").style.display = "flex";

@@ -19,21 +19,21 @@
     </div>
     <div class="pop-up-container w-screen h-screen flex items-center justify-center fixed bg-black bg-opacity-50">
         <div class="pop-up-dialog flex flex-col items-center justify-center gap-3 w-11/12 lg:w-fit bg-white py-6 px-6 rounded-xl shadow-2xl">
-            <h5 class="text-4xl text-blue-400 text-center">¡Bienvenido!</h5>
-            <p class="text-xl text-center text-gray-500 mt-1 mb-6">Introduce una ciudad para saber el pronostico de esa zona.</p>
+            <h5 class="text-4xl text-blue-400 text-center">Welcome!</h5>
+            <p class="text-xl text-center text-gray-500 mt-1 mb-6">Enter a city to find out the forecast for that area.</p>
             <form class="form-seleccionar-ciudad flex flex-col items-center gap-3">
-                <input type="text" name="ciudad" id="ciudad" class="text-2xl text-gray-600 border-2 border-gray-300 rounded-xl outline-none px-3 focus:border-blue-400 hover:border-gray-500" placeholder="Ej: San Salvador de Jujuy" autocomplete="off">
-                <button type="submit" class="text-lg text-blue-400 font-bold border-2 border-blue-400 rounded-full px-5 hover:bg-blue-400 hover:text-white">ACEPTAR</button>
+                <input type="text" name="ciudad" id="ciudad" class="text-center text-2xl text-gray-600 border-2 border-gray-300 rounded-xl outline-none px-3 focus:border-blue-400 hover:border-gray-500" placeholder="Ex: New York" autocomplete="off">
+                <button type="submit" class="text-lg text-blue-400 font-bold border-2 border-blue-400 rounded-full px-5 hover:bg-blue-400 hover:text-white">OK</button>
             </form>
-            <button class="btn-cancelar text-lg text-red-400 font-bold border-2 border-red-400 rounded-full px-5 hover:bg-red-400 hover:text-white">CANCELAR</button>
+            <button class="btn-cancelar text-lg text-red-400 font-bold border-2 border-red-400 rounded-full px-5 hover:bg-red-400 hover:text-white">CANCEL</button>
         </div>
     </div>
     <main class="w-full flex flex-col items-center py-4 bg-blue-900 bg-opacity-80 overflow-hidden hidden">
         <article class="clima-hoy w-11/12 h-fit bg-gray-900 bg-opacity-50 rounded-xl py-6 px-6 text-white shadow-xl">
-            <div class="localidad flex items-center gap-x-2 text-2xl underline">
+            <div class="localidad flex items-center gap-x-2 text-2xl">
                 <i class="bi bi-geo-alt-fill"></i>
-                <div class="ciudad"></div>
-                <button class="editar-ciudad"><i class="bi bi-pencil-square"></i></button>
+                <div class="ciudad underline"></div>
+                <button class="editar-ciudad mx-3" title="Cambiar ciudad"><i class="bi bi-pencil-fill"></i></button>
             </div>
             <div class="fecha-actual font-bold my-2"></div>
             <div class="clima-actual flex gap-10 my-5">
@@ -48,27 +48,27 @@
             </div>
             <div class="mas-informacion grid grid-cols-2 gap-y-2 gap-5 lg:flex">
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Máxima<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">High<i class="bi bi-info-circle"></i></span>
                     <span class="max"></span>
                 </div>
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Mínima<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Low<i class="bi bi-info-circle"></i></span>
                     <span class="min"></span>
                 </div>
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Vientos<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Wind<i class="bi bi-info-circle"></i></span>
                     <span class="vientos"></span>
                 </div>
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Humedad<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Humidity<i class="bi bi-info-circle"></i></span>
                     <span class="humedad"></span>
                 </div>
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Visibilidad<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Visibility<i class="bi bi-info-circle"></i></span>
                     <span class="visibilidad"></span>
                 </div>
                 <div class="item">
-                    <span class="flex items-center gap-1 font-bold hover:underline">Prob. de precipitaciones<i class="bi bi-info-circle"></i></span>
+                    <span class="flex items-center gap-1 font-bold hover:underline">Rain<i class="bi bi-info-circle"></i></span>
                     <span class="precipitaciones"></span>
                 </div>
                 <div class="item">
