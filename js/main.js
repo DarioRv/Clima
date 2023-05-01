@@ -21,7 +21,6 @@ let replaceCharacter = (string, oldCharacter, newCharacter) => {
 let dateFormatter = (date) => {
     date = replaceCharacter(date, "-", "/");
     let formattedDate = new Date(date);
-    console.log(formattedDate);
     formattedDate = formattedDate.toDateString();
     return formattedDate.substring(0, 3) + " " + formattedDate.substring(8, 10);
 }
@@ -85,7 +84,6 @@ let setNextDaysConditions = (nextDaysconditions) => {
     });
 }
 let renderizarDatos = (datos) => {
-    console.log(datos);
     disenableLoader();
     setAddress(datos.resolvedAddress);
     setCurrentTime(datos.days[0].datetime,datos.currentConditions.datetime);
