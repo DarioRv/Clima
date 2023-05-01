@@ -13,11 +13,11 @@ El proyecto implementa la API de [visualcrossing](https://www.visualcrossing.com
 ![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat-square&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
 
 ## Instrucciones de uso
-1. Para acceder deberás hacer click [aquí](https://dariorv.github.io/Clima/) y serás redirigido al sitio web. Una vez allí podrás ingresar tu ciudad u otra donde quieras saber el pronóstico.
+1. Para acceder deberás hacer click [aquí](https://dariorv.github.io/Clima/) y serás redirigido al sitio web. Una vez allí podrás ingresar tu ciudad u otra donde quieras saber el pronóstico. <br>
 ![Página inicial](./images/demo-example-1.jpg)
 
-2. Una vez configurada tu ciudad podrás ver los detalles del pronóstico.
-![Ejemplo](./images/demo-example-2.png)
+2. Una vez configurada tu ciudad podrás ver los detalles del pronóstico. <br>
+![Ejemplo](./images/demo-example-2.jpg)
 
 ## Ultima actualización
 Agosto de 2023
