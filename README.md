@@ -20,4 +20,4 @@ El proyecto implementa la API de [visualcrossing](https://www.visualcrossing.com
 ![Ejemplo](./images/demo-example-2.jpg)
 
 ## Ultima actualización
-Agosto de 2023
+Abril de 2023
